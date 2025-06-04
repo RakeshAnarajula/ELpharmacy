@@ -1,0 +1,46 @@
+import React, { useEffect } from 'react';
+
+const Loader = () => {
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes dotJump {
+        0%, 80%, 100% {
+          transform: scale(0);
+        }
+        40% {
+          transform: scale(2.0);
+        }
+      }
+      .animate-dot1 {
+        animation: dotJump 1.6s -0.32s linear infinite;
+      }
+      .animate-dot2 {
+        animation: dotJump 1.6s -0.16s linear infinite;
+      }
+      .animate-dot3 {
+        animation: dotJump 1.6s linear infinite;
+      }
+    `;
+    document.head.appendChild(style);
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
+
+  return (
+    <div className="fixed inset-0 flex flex-col items-center justify-center bg-white z-50">
+      <div className="mb-6 text-3xl font-bold tracking-wide">
+        <span className="text-[#0074C8]">EL</span>
+        <span className="text-[#00B140]">pharmacy</span>
+      </div>
+      <div className="flex flex-row items-center justify-center">
+        <div className="w-4 h-4 rounded-full border-2 border-white bg-[#0074C8] mx-2.5 animate-dot1"></div>
+        <div className="w-4 h-4 rounded-full border-2 border-white bg-[#0074C8] mx-2.5 animate-dot2"></div>
+        <div className="w-4 h-4 rounded-full border-2 border-white bg-[#0074C8] mx-2.5 animate-dot3"></div>
+      </div>
+    </div>
+  );
+};
+
+export default Loader;
